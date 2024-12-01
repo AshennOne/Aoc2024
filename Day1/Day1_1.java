@@ -13,10 +13,11 @@ public class Day1_1 {
         List<Integer> list2 = new ArrayList<>();
         list1= getColumnAsInt(0, input);
         list2= getColumnAsInt(1, input);
+        Collections.sort(list1);
+        Collections.sort(list2);
         Integer sum = 0;
         for (int i = 0; i < list1.size(); i++) {
-            Integer simmilarityScore = list1.get(i) * findALlOccurences(list2, list1.get(i));
-            sum += simmilarityScore;
+            sum += Math.abs(list1.get(i) - list2.get(i));
         }
         System.out.println(sum);
     }
