@@ -20,6 +20,7 @@ public class Day1_1 {
             sum += Math.abs(list1.get(i) - list2.get(i));
         }
         System.out.println(sum);
+        
     }
 
 }
