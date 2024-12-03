@@ -1,11 +1,13 @@
 package Utils;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -30,6 +32,21 @@ public class Utils {
 
     public static Integer findALlOccurences(List<Integer> list, int value) {
         return (int)(list.stream().filter(x -> x == value).count());
+    }
+
+    public static List<String> findAllStringsByRegex(String pathString, String regex) {
+        Path path = Paths.get(pathString);
+        Pattern pattern = Pattern.compile(regex);
+        try {
+            return Files.lines(path)
+                        .flatMap(line -> pattern.matcher(line).results().map(matchResult -> matchResult.group()))
+                        .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+
+
     }
 
 }
